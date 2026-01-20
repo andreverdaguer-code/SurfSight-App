@@ -1,0 +1,257 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+}
+
+body {
+    background-color: #1d1d1d;
+    color: #fff;
+    font-size: 20px;
+    font-family: Hepta Slab, Inter;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+select {
+    color: #000;
+    font-size: 20px;
+    font-family: Hepta Slab, Inter;
+    background: #fff;
+    border: solid 2px #fff;
+    border-radius: 5px;
+}
+
+label[for="fileSelect"] {
+    display: inline-block;
+    color: #fff;
+    background: #269DFF;
+    text-align: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: solid 2px #269DFF;
+    border-radius: 5px;
+}
+
+label[for="fileSelect"]:hover {
+    background: #4dadfc;
+    border-color: #4dadfc;
+}
+
+#manageButton, #validateButton, #exportButton, #clearButton {
+    display: flex;
+    background: #269DFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: solid 2px #269DFF;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 30px auto 0px;
+}
+
+#export-clear-log {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#manageButton:hover, #validateButton:hover, #exportButton:hover, #clearButton:hover {
+    background: #4dadfc;
+    border-color: #4dadfc;
+}
+
+#message {
+    color: #fff;
+    background: #0F0E17;
+    border-radius: 5px;
+    font-family: Hepta Slab, Inter;
+    font-size: 20px;
+}
+
+#imeiInput {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#input-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    align-items: center;
+}
+
+table {
+    border: solid 2px #939393;
+    border-radius: 5px;
+}
+
+hr {
+    color: #939393;
+    margin: 50px 0px;
+    width: 700px;
+}
+
+#structure {
+    background-color: #0F0E17;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 700px;
+    margin: 100px auto;
+    height: 1000px;
+    padding: 20px 50px;
+    border-radius: 30px;
+}
+
+.results-table-wrapper {
+    max-height: 260px;
+    overflow-y: auto;
+    margin-top: 8px;
+    padding-right: 4px;
+}
+
+.results-table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#manage-results-body tr, #validate-results-body tr {
+    border-bottom: solid 2px #939393;
+}
+
+#login-section {
+    margin: 100px auto;
+}
+
+#loginSection {
+  background-color: #0F0E17;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 500px;
+  height: 400px;
+  margin: 80px auto;      /* center horizontally with some top space */
+  padding: 40px;
+  border-radius: 30px;
+}
+
+/* title */
+#loginSection h2 {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/* form layout */
+#surf-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* inputs */
+#surf-login-form input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111118;
+  color: #fff;
+}
+
+/* button */
+#surf-login-form button {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #269DFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+nav {
+    margin-bottom: 50px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    padding: 0;
+    z-index: 1;
+}
+
+nav a {
+    display: inline-block;
+    color: #939393;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+nav a.active {
+    color: #fff;
+    border-bottom: solid 2px #269DFF;
+    padding-bottom: 10px;
+}
+
+#search-bar {
+    color: #fff;
+    background: #0F0E17;
+    border: solid 2px #939393;
+    border-radius: 5px;
+    font-size: 20px;
+    width: 300px;
+}
+
+.loading-indicator[hidden] {
+    display: none;
+}
+
+.loading-indicator {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #1b1b27;
+  border: 1px solid #2a2a3a;
+  font-size: 0.9rem;
+  color: #e5e5e5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-indicator::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #269DFF;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+/* when done, stop the spin animation */
+.loading-indicator.done::before {
+  animation: none;
+  border-top-color: #269DFF; /* solid ring */
+}
+
+.loading-indicator[hidden] {
+  display: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+    <title>Bulk SurfSight App</title>
+</head>
+<body>
+    <div id="structure">
+        <h1>SurfSight Device Manager</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Manage</a></li>
+                <li><a href="validate.html">Validate</a></li>
+                <li><a href="logs.html" class="active">Logs</a></li>
+            </ul>
+        </nav>
+        <!--Run History Section-->
+        <section>
+            <div id="statusFields">
+                <!--This is for the search field-->
+                <p>Run History:</p>
+                <input id="search-bar" type="text" placeholder="Search logs...">
+            </div>
+            <br>
+            <!--This is the Run ID Table-->
+            <div>
+                <p>Results:</p>
+                <table id="log-runs" width="700">
+                    <thead>
+                        <tr align="left">
+                            <th width="175">Run ID</th>
+                            <th width="175">Date/Time</th>
+                            <th width="175">Action</th>
+                            <th width="175">Performed By</th>
+                        </tr>
+                    </thead>
+                    <tbody id="run-results-body"></tbody>
+                </table>
+            </div>
+            <br>
+        <hr>
+        <!--Results Table Section-->
+        <section>
+            <div>
+                <p>Run #001:</p>
+                <table id="run-results" width="700">
+                    <thead>
+                        <tr align="left">
+                            <th width="200">IMEI</th>
+                            <th width="150">Action</th>
+                            <th width="150">Result</th>
+                            <th width="150">Note</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log-run-results-body"></tbody>
+                </table>
+            </div>
+            <div id="export-clear-log">
+                <button id="exportButton">Export CSV</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
