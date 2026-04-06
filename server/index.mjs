@@ -41,6 +41,11 @@ app.use(session({
 
 const SURF_BASE = 'https://api-prod.surfsight.net/v2';
 
+// Serve SheetJS browser bundle
+app.get('/xlsx.min.js', (_req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'node_modules', 'xlsx', 'dist', 'xlsx.full.min.js'));
+});
+
 app.post('/api/auth/login', async (req, res) => {
     const { email, password } = req.body;
 

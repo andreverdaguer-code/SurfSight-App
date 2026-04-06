@@ -12,18 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       csvFileName.textContent = file.name;
 
+      const isXlsx = file.name.toLowerCase().endsWith('.xlsx');
       const reader = new FileReader();
+
       reader.onload = (e) => {
-        const imeis = parseIMEIsFromCSV(e.target.result);
+        const imeis = isXlsx
+          ? parseIMEIsFromXLSX(e.target.result)
+          : parseIMEIsFromCSV(e.target.result);
+
         if (!imeis.length) {
-          alert('No IMEI column found in this CSV. Make sure there is a column header named "IMEI".');
+          alert('No IMEI column found. Make sure there is a column header named "IMEI".');
           csvFileName.textContent = '';
-          csvFile.value = '';
           return;
         }
         imeiTextarea.value = imeis.join('\n');
       };
-      reader.readAsText(file);
+
+      if (isXlsx) {
+        reader.readAsArrayBuffer(file);
+      } else {
+        reader.readAsText(file);
+      }
 
       // reset so the same file can be re-imported if needed
       csvFile.value = '';
@@ -269,6 +278,21 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadCSV(csv, "surfsight_results.csv");
   });
 });
+
+function parseIMEIsFromXLSX(arrayBuffer) {
+  const workbook  = XLSX.read(arrayBuffer, { type: 'array' });
+  const sheet     = workbook.Sheets[workbook.SheetNames[0]];
+  const rows      = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+
+  if (!rows.length) return [];
+
+  const imeiKey = Object.keys(rows[0]).find(k => k.toLowerCase() === 'imei');
+  if (!imeiKey) return [];
+
+  return rows
+    .map(row => String(row[imeiKey]).trim())
+    .filter(Boolean);
+}
 
 function parseIMEIsFromCSV(text) {
   const lines = text.split(/\r?\n/).filter(l => l.trim());

@@ -52,8 +52,8 @@
                     <div id="imeiInput">
                         <div class="imei-label-row">
                             <label for="message">IMEIs</label>
-                            <label for="csvFile" class="csv-import-btn">Import CSV</label>
-                            <input id="csvFile" type="file" accept=".csv" />
+                            <label for="csvFile" class="csv-import-btn">Import XLSX</label>
+                            <input id="csvFile" type="file" accept=".xlsx,.csv" />
                             <span id="csvFileName" class="csv-file-name"></span>
                         </div>
                         <textarea id="message" name="message" rows="5"
@@ -91,6 +91,7 @@
             </div>
         </div>
     </div>
+    <script src="/xlsx.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

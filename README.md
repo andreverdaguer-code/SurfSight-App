@@ -6,7 +6,7 @@ A desktop application for bulk managing SurfSight devices. Built with Electron +
 
 - **Manage** — bulk update device billing status (Activate, Deactivate, Suspend) or video quality level
 - **Verify** — check whether devices exist in SurfSight and view their current billing status
-- **CSV Import** — import a CSV file with an `IMEI` column to populate the device list automatically
+- **XLSX / CSV Import** — import an Excel or CSV file with an `IMEI` column to populate the device list automatically
 - **Remember Me** — optionally save login credentials, encrypted with the OS keychain (Windows DPAPI)
 - **Export CSV** — export operation results to a CSV file
 
