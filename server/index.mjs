@@ -24,12 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(publicDir));
 
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.sendFile('login.html', { root: publicDir });
 });
 
 app.use(session({
-    secret: 'replace this later',
+    secret: process.env.SESSION_SECRET || 'surfsight-local-dev-secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -38,8 +38,6 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000,
     },
 }));
-
-app.use(express.static('public'));
 
 const SURF_BASE = 'https://api-prod.surfsight.net/v2';
 
@@ -247,7 +245,7 @@ app.post('/api/devices/quality', requireSurfSight, async (req, res) => {
     qualityLevel < 2 ||
     qualityLevel > 6
   ) {
-    return res.status(400).json({ error: 'Quality level must be 1–5.' });
+    return res.status(400).json({ error: 'Quality level must be Level 1–5.' });
   }
 
   const { token } = req.session.surfsight;

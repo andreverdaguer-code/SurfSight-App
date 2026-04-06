@@ -4,62 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
-    <title>Bulk SurfSight App</title>
+    <title>SurfSight Device Manager</title>
 </head>
 <body>
-    <div id="structure">
-        <h1>SurfSight Device Manager</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Manage</a></li>
-                <li><a href="validate.html" class="active">Verify</a></li>
-                <!--<li><a href="logs.html">Logs</a></li>-->
-            </ul>
-        </nav>
-        <!--IMEI Input Section-->
-        <section>
-            <!--This is the IMEI input fields-->
-            <div id="imeiInput">
-                <label name="message">IMEI(s):</label>
-                <div id="input-row">
-                    <textarea id="message" name="message" rows="5" cols="33" placeholder="Ex. 357650101213857, 357650357521654, etc..."></textarea>
-                    <!--<p>or</p>
-                    <label for="fileSelect">Upload CSV</label>
-                    <input id="fileSelect" type="file" accept=".csv" />-->
+    <div id="app">
+        <aside id="sidebar">
+            <div id="sidebar-header">
+                <div class="app-name">SurfSight</div>
+                <div class="app-sub">Device Manager</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><span class="nav-icon">⚙</span> Manage</a></li>
+                    <li><a href="validate.html" class="active"><span class="nav-icon">✓</span> Verify</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div id="main">
+            <div id="page-header">
+                <h1>Verify Devices</h1>
+                <p>Check whether devices exist and view their billing status</p>
+            </div>
+
+            <div id="page-content">
+                <!-- Input -->
+                <div class="panel">
+                    <div class="panel-title">Device IMEIs</div>
+                    <div id="imeiInput">
+                        <label for="message">IMEIs</label>
+                        <textarea id="message" name="message" rows="5"
+                            placeholder="Enter IMEIs separated by commas or new lines&#10;Ex. 357650101213857, 357650357521654"></textarea>
+                    </div>
+                    <div>
+                        <button id="validateButton" class="btn-primary">Verify Devices</button>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="panel" style="flex:1; min-height:0;">
+                    <div id="loadingIndicator" class="loading-indicator" hidden>
+                        <span id="loadingText"></span>
+                    </div>
+                    <p class="results-label">Results</p>
+                    <div class="results-table-wrapper">
+                        <table id="validate-results">
+                            <thead>
+                                <tr>
+                                    <th>IMEI</th>
+                                    <th>Exists</th>
+                                    <th>Billing Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="validate-results-body"></tbody>
+                        </table>
+                    </div>
+                    <div id="export-clear-log">
+                        <button id="exportButton">Export CSV</button>
+                    </div>
                 </div>
             </div>
-            <br>
-            <!--This is the Apply Changes button-->
-            <div>
-                <button id="validateButton">Verify Devices</button>
-            </div>
-        </section>
-        <hr>
-        <!--Results Table Section-->
-        <section>
-            <div id="loadingIndicator" class="loading-indicator" hidden>
-                <span id="loadingText"></span>
-            </div>
-            <div class="results-table-wrapper">
-                <p>Results:</p>
-                <table id="validate-results" width="700">
-                    <thead>
-                        <tr align="left">
-                            <th width="300">IMEI</th>
-                            <th width="200">Exists</th>
-                            <th width="200">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="validate-results-body"></tbody>
-                </table>
-            </div>
-            <div id="export-clear-log">
-                <button id="exportButton">Export CSV</button>
-            </div>
-        </section>
+        </div>
     </div>
     <script src="validate.js"></script>
 </body>

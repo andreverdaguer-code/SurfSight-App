@@ -1,6 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('manage.js loaded');
 
+  // CSV import
+  const csvFile = document.getElementById('csvFile');
+  const csvFileName = document.getElementById('csvFileName');
+
+  if (csvFile) {
+    csvFile.addEventListener('change', () => {
+      const file = csvFile.files[0];
+      if (!file) return;
+
+      csvFileName.textContent = file.name;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imeis = parseIMEIsFromCSV(e.target.result);
+        if (!imeis.length) {
+          alert('No IMEI column found in this CSV. Make sure there is a column header named "IMEI".');
+          csvFileName.textContent = '';
+          csvFile.value = '';
+          return;
+        }
+        imeiTextarea.value = imeis.join('\n');
+      };
+      reader.readAsText(file);
+
+      // reset so the same file can be re-imported if needed
+      csvFile.value = '';
+    });
+  }
+
   const imeiTextarea = document.getElementById('message');              // textarea
   const statusSelect = document.querySelector('select[name="status"]'); // status dropdown
   const qualitySelect = document.querySelector('select[name="quality"]'); // quality dropdown
@@ -129,7 +158,7 @@ async function applyQualityChanges(imeis, qualityValue, resultsBody) {
   const qualityLevel = Number(qualityValue);
 
   if (!Number.isInteger(qualityLevel) || qualityLevel < 2 || qualityLevel > 6) {
-    alert('Quality level must be between 1 and 5.');
+    alert('Please select a valid quality level (Level 1–5).');
     return;
   }
 
@@ -240,6 +269,40 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadCSV(csv, "surfsight_results.csv");
   });
 });
+
+function parseIMEIsFromCSV(text) {
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (lines.length < 2) return [];
+
+  // Split a CSV line respecting quoted fields
+  function splitLine(line) {
+    const cols = [];
+    let cur = '', inQuote = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        inQuote = !inQuote;
+      } else if (ch === ',' && !inQuote) {
+        cols.push(cur.trim());
+        cur = '';
+      } else {
+        cur += ch;
+      }
+    }
+    cols.push(cur.trim());
+    return cols;
+  }
+
+  const headers = splitLine(lines[0]).map(h => h.toLowerCase());
+  const imeiIdx = headers.findIndex(h => h === 'imei');
+  if (imeiIdx === -1) return [];
+
+  return lines
+    .slice(1)
+    .map(l => splitLine(l)[imeiIdx] || '')
+    .map(v => v.trim())
+    .filter(Boolean);
+}
 
 function tableToCSV(table) {
   let csvRows = [];
